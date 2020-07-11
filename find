@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+for p in "$@"; do
+  if [ "$p" = "-iname" ]; then
+    echo "find: bad option -iname" >&2
+    exit 1
+  fi
+done
+
+REAL_FIND_CMD=`which -a find | grep -v $(realpath $0) | head -n 1`
+$REAL_FIND_CMD "$@"
